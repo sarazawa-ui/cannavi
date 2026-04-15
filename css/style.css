@@ -1505,6 +1505,93 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ===== パスワード保護モーダル ===== */
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent) 0%, #0055b8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  font-family: var(--font);
+}
+
+.password-modal-content {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 340px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.password-modal-content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px 0;
+  letter-spacing: -1px;
+}
+
+.password-modal-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 24px 0;
+  font-weight: 500;
+}
+
+.password-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1.5px solid #e5e5e7;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: var(--font);
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.password-submit {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.password-submit:active {
+  opacity: 0.8;
+}
+
+.password-error {
+  font-size: 13px;
+  color: #d70015;
+  margin-top: 12px;
+  min-height: 16px;
+  font-weight: 500;
+}
+
 /* ===== スクロールバー非表示 ===== */
 .page-content::-webkit-scrollbar { display: none; }
 .page-content { scrollbar-width: none; }
