@@ -67,6 +67,7 @@ export function renderCourseCard(course, animateIndex = 0) {
     <div class="course-card animate-in" style="animation-delay:${animateIndex * 0.05}s" onclick="window.appNavigate('/course/${course.id}')">
       <div class="course-card-top">
         <span class="course-card-category">${course.category}</span>
+        ${course.faculty === '全学部' ? '<span class="badge-general">共通教養</span>' : '<span class="badge-specialty">専門科目</span>'}
         <button class="course-card-fav" onclick="event.stopPropagation(); window.appToggleFav(${course.id})">${fav ? '❤️' : '🤍'}</button>
       </div>
       <h3>${course.title}</h3>

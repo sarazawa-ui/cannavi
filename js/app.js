@@ -20,9 +20,13 @@ const app = document.getElementById('app');
 window.appNavigate = (path) => router.navigate(path);
 
 window.appToggleFav = (courseId) => {
-  toggleFavorite(courseId);
-  // Re-render current page
-  router.resolve();
+  const isFav = toggleFavorite(courseId);
+  // お気に入りページにいる場合のみ再レンダリング（詳細ページでは再レンダリングしない）
+  const hash = window.location.hash;
+  if (hash === '#/favorites') {
+    router.resolve();
+  }
+  return isFav;
 };
 
 // ===== ルート定義 =====

@@ -1592,6 +1592,108 @@ body {
   font-weight: 500;
 }
 
+/* ===== 難易度詳細パネル ===== */
+.hidden { display: none !important; }
+
+.difficulty-detail {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin: 8px 16px 0;
+  font-size: 13px;
+}
+
+.difficulty-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #e5e5e7;
+  color: var(--text-secondary);
+}
+
+.difficulty-detail-row:last-child { border-bottom: none; }
+.difficulty-detail-row span:last-child { font-weight: 600; color: var(--text); }
+
+/* ===== 教科書情報 ===== */
+.textbook-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.textbook-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #e5e5e7;
+  color: var(--text-secondary);
+}
+
+.textbook-badge.required {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.textbook-name {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.textbook-price {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* ===== コースカードのバッジ ===== */
+.badge-general {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  margin-right: 4px;
+}
+
+.badge-specialty {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--accent-light);
+  color: var(--accent);
+  margin-right: 4px;
+}
+
+/* ===== キャリアおすすめ理由 ===== */
+.career-recommend-reason {
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: #fffbea;
+  border-left: 3px solid #f5a623;
+  padding: 8px 12px;
+  border-radius: 0 8px 8px 0;
+  margin: 12px 0 4px;
+  line-height: 1.5;
+}
+
+.career-recommend-reason strong { color: var(--text); }
+
+/* ===== 時間割競合セル ===== */
+.timetable-cell.conflict {
+  background: #fff3cd;
+  color: #856404;
+  font-size: 10px;
+}
+
 /* ===== スクロールバー非表示 ===== */
 .page-content::-webkit-scrollbar { display: none; }
 .page-content { scrollbar-width: none; }

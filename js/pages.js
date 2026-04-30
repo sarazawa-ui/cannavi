@@ -92,17 +92,35 @@ export function renderCoursePage(params) {
             <div class="detail-stat-label">満足度</div>
           </div>
           <div class="detail-stat">
-            <div class="detail-stat-value">${course.enrollCount}</div>
-            <div class="detail-stat-label">履修者数</div>
+            <div class="detail-stat-value">${course.semesterEnrollCount}</div>
+            <div class="detail-stat-label">今学期履修者数</div>
           </div>
           <div class="detail-stat">
             <div class="detail-stat-value">${course.credits}</div>
             <div class="detail-stat-label">単位</div>
           </div>
-          <div class="detail-stat">
+          <div class="detail-stat" style="cursor:pointer" onclick="document.getElementById('difficultyDetail').classList.toggle('hidden')">
             <div class="detail-stat-value">${['', '入門', '易', '標準', '発展', '上級'][course.difficulty]}</div>
-            <div class="detail-stat-label">難易度</div>
+            <div class="detail-stat-label">難易度 ▾</div>
           </div>
+        </div>
+      </div>
+      <div id="difficultyDetail" class="difficulty-detail hidden">
+        <div class="difficulty-detail-row">
+          <span>単位取得率</span>
+          <span>${course.difficultyReason?.creditRate ?? '--'}%</span>
+        </div>
+        <div class="difficulty-detail-row">
+          <span>課題量</span>
+          <span>${course.difficultyReason?.homeworkLoad ?? '--'}</span>
+        </div>
+        <div class="difficulty-detail-row">
+          <span>出席の厳しさ</span>
+          <span>${course.difficultyReason?.attendanceStrict ? '厳しい' : '普通'}</span>
+        </div>
+        <div class="difficulty-detail-row">
+          <span>ポイント</span>
+          <span>${course.difficultyReason?.reason ?? '--'}</span>
         </div>
       </div>
 
@@ -145,7 +163,7 @@ export function renderCoursePage(params) {
             ` : ''}
             <div class="professor-name" id="selectedInstructorName">${defaultInstructor || prof?.name || '担当教員'}</div>
             <div class="professor-dept">${course.university} / ${course.faculty}</div>
-            <div class="professor-greeting">${course.syllabusUrl ? `シラバス参照元: ${course.syllabusUrl}` : (prof?.greeting || 'シラバス情報を参照してください。')}</div>
+            <div class="professor-greeting">${course.syllabusUrl ? `<a href="${course.syllabusUrl}" target="_blank" style="color:var(--accent);text-decoration:none;font-size:13px">📄 シラバスを見る →</a>` : (prof?.greeting || 'シラバス情報を参照してください。')}</div>
             <div class="professor-meta">
               <div class="professor-meta-item"><strong>担当教員:</strong> ${defaultInstructor || 'シラバス参照'}</div>
               <div class="professor-meta-item"><strong>授業情報:</strong> ${course.subtitle}</div>
@@ -168,6 +186,22 @@ export function renderCoursePage(params) {
         ${renderEvalBars(course.evaluation)}
       </div>
 
+      <!-- 教科書情報 -->
+      <div class="info-card animate-in" style="animation-delay:0.22s">
+        <div class="info-card-title">📚 教科書情報</div>
+        ${course.textbook?.required
+          ? `<div class="textbook-info required">
+              <span class="textbook-badge required">教科書あり</span>
+              <span class="textbook-name">${course.textbook.name || ''}</span>
+              ${course.textbook.price ? `<span class="textbook-price">¥${course.textbook.price.toLocaleString()}</span>` : ''}
+             </div>`
+          : `<div class="textbook-info">
+              <span class="textbook-badge">教科書不要</span>
+              <span class="textbook-note">${course.textbook?.note || '資料配布'}</span>
+             </div>`
+        }
+      </div>
+
       <!-- 基本情報 (折りたたみ) -->
       <div class="info-card collapsible animate-in" style="animation-delay:0.25s" id="basicInfoCollapsible">
         <div class="info-card-title">📋 基本情報</div>
@@ -175,10 +209,13 @@ export function renderCoursePage(params) {
           <div class="basic-info-grid">
             <div class="basic-info-item"><dt>曜日・時限</dt><dd>${course.day}曜 ${course.period}限</dd></div>
             <div class="basic-info-item"><dt>学期</dt><dd>${course.semester}</dd></div>
-            <div class="basic-info-item"><dt>対象学年</dt><dd>${course.year.join('・')}年</dd></div>
+            <div class="basic-info-item"><dt>授業形式</dt><dd>${course.format || '--'}</dd></div>
+            <div class="basic-info-item"><dt>授業時間</dt><dd>${course.classMinutes ? course.classMinutes + '分/コマ' : '--'}</dd></div>
+            <div class="basic-info-item"><dt>教室</dt><dd>${course.classroom || '--'}</dd></div>
+            <div class="basic-info-item"><dt>対象学年</dt><dd>${course.yearNote || course.year.join('・') + '年'}</dd></div>
             <div class="basic-info-item"><dt>学部</dt><dd>${course.faculty}</dd></div>
             <div class="basic-info-item"><dt>単位数</dt><dd>${course.credits}単位</dd></div>
-            <div class="basic-info-item"><dt>履修者数</dt><dd>${course.enrollCount}名</dd></div>
+            <div class="basic-info-item"><dt>今学期履修者数</dt><dd>${course.semesterEnrollCount != null ? course.semesterEnrollCount + '名' : '--'}</dd></div>
           </div>
         </div>
       </div>
@@ -192,7 +229,7 @@ export function renderCoursePage(params) {
       </div>
     </div>
 
-    <button class="detail-fav-btn" id="detailFavBtn" onclick="window.appToggleFav(${course.id})">${fav ? '❤️' : '🤍'}</button>
+    <button class="detail-fav-btn" id="detailFavBtn" onclick="(function(e){e.stopPropagation();const btn=document.getElementById('detailFavBtn');const now=window.appToggleFav(${course.id});btn.textContent=now?'❤️':'🤍';})(event)">${fav ? '❤️' : '🤍'}</button>
     ${renderLayout('')}
   `;
 }
@@ -259,7 +296,15 @@ function renderCareerResults(careerId) {
       <div class="career-skill-map">
         ${career.skills.map(s => `<span class="skill-badge accent">${s}</span>`).join('')}
       </div>
-      ${recommended.map((c, i) => renderCourseCard(c, i)).join('')}
+      ${recommended.map((c, i) => `
+        <div class="career-recommend-reason">
+          💡 <strong>${c.title}</strong>をおすすめする理由：
+          ${c.careerTags.filter(t => t === career.label || career.skills.some(s => c.skills.includes(s))).length > 0
+            ? `「${career.label}」に必要な ${c.skills.filter(s => career.skills.includes(s)).join('・') || c.skills[0]} が身につく授業です`
+            : `${career.label}に関連するスキルが習得できます`}
+        </div>
+        ${renderCourseCard(c, i)}
+      `).join('')}
     </div>
   `;
 }
@@ -267,13 +312,28 @@ function renderCareerResults(careerId) {
 export function initCareerPage() {
   const grid = document.getElementById('careerGrid');
   const results = document.getElementById('careerResults');
+  let selectedCareerId = null;
+
+  // URLから初期選択を取得
+  const hash = window.location.hash;
+  const urlParams = new URLSearchParams(hash.includes('?') ? hash.split('?')[1] : '');
+  selectedCareerId = urlParams.get('select') || null;
 
   grid?.querySelectorAll('.career-card').forEach(card => {
     card.addEventListener('click', () => {
-      grid.querySelectorAll('.career-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
       const careerId = card.dataset.career;
-      results.innerHTML = renderCareerResults(careerId);
+      if (selectedCareerId === careerId) {
+        // 同じカードをタップ → 選択解除
+        selectedCareerId = null;
+        grid.querySelectorAll('.career-card').forEach(c => c.classList.remove('selected'));
+        results.innerHTML = '';
+      } else {
+        // 新規選択
+        selectedCareerId = careerId;
+        grid.querySelectorAll('.career-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        results.innerHTML = renderCareerResults(careerId);
+      }
     });
   });
 }
@@ -419,7 +479,7 @@ function applyFilters() {
     case 'satisfaction': filtered.sort((a, b) => b.satisfaction - a.satisfaction); break;
     case 'difficulty-asc': filtered.sort((a, b) => a.difficulty - b.difficulty); break;
     case 'difficulty-desc': filtered.sort((a, b) => b.difficulty - a.difficulty); break;
-    case 'enroll': filtered.sort((a, b) => b.enrollCount - a.enrollCount); break;
+    case 'enroll': filtered.sort((a, b) => b.semesterEnrollCount - a.semesterEnrollCount); break;
   }
 
   const resultsEl = document.getElementById('filterResults');
@@ -442,7 +502,8 @@ export function renderFavoritesPage() {
   const timetable = {};
   favCourses.forEach(c => {
     const key = `${c.day}-${c.period}`;
-    timetable[key] = c;
+    if (!timetable[key]) timetable[key] = [];
+    timetable[key].push(c);
   });
 
   return `
@@ -457,9 +518,9 @@ export function renderFavoritesPage() {
             ${[1,2,3,4,5].map(period => `
               <div class="timetable-period">${period}限</div>
               ${days.map(day => {
-                const c = timetable[`${day}-${period}`];
-                return c
-                  ? `<div class="timetable-cell filled" onclick="window.appNavigate('/course/${c.id}')">${c.title.slice(0, 4)}</div>`
+                const cells = timetable[`${day}-${period}`] || [];
+                return cells.length > 0
+                  ? `<div class="timetable-cell filled ${cells.length > 1 ? 'conflict' : ''}" onclick="window.appNavigate('/course/${cells[0].id}')" title="${cells.map(c=>c.title).join(' / ')}">${cells.length > 1 ? '⚠️' + cells[0].title.slice(0,3) : cells[0].title.slice(0,4)}</div>`
                   : `<div class="timetable-cell"></div>`;
               }).join('')}
             `).join('')}
