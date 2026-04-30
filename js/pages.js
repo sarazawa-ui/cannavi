@@ -46,7 +46,7 @@ export function initHomePage() {
       filtered = filtered.filter(c =>
         c.title.toLowerCase().includes(query) ||
         c.subtitle.toLowerCase().includes(query) ||
-        c.skills.some(s => s.toLowerCase().includes(query)) ||
+        (c.skills || []).some(s => s.toLowerCase().includes(query)) ||
         c.category.toLowerCase().includes(query) ||
         c.description.toLowerCase().includes(query)
       );
@@ -142,7 +142,7 @@ export function renderCoursePage(params) {
       <div class="info-card animate-in" style="animation-delay:0.05s">
         <div class="info-card-title">🎯 身につくスキル</div>
         <div class="skill-list">
-          ${course.skills.map(s => `<span class="skill-badge accent">${s}</span>`).join('')}
+          ${(course.skills || []).map(s => `<span class="skill-badge accent">${s}</span>`).join('')}
         </div>
       </div>
 
@@ -177,7 +177,7 @@ export function renderCoursePage(params) {
       <!-- 履修者の声 -->
       <div class="info-card animate-in" style="animation-delay:0.15s">
         <div class="info-card-title">💬 履修した先輩の声</div>
-        ${course.reviews.map(r => renderReviewCard(r)).join('')}
+        ${(course.reviews || []).map(r => renderReviewCard(r)).join('')}
       </div>
 
       <!-- 評価方法 -->
@@ -224,7 +224,7 @@ export function renderCoursePage(params) {
       <div class="info-card animate-in" style="animation-delay:0.3s">
         <div class="info-card-title">🚀 この授業が活きるキャリア</div>
         <div class="skill-list">
-          ${course.careerTags.map(t => `<span class="skill-badge" style="cursor:pointer" onclick="window.appNavigate('/career?select=${encodeURIComponent(careers.find(c=>c.label===t)?.id||'')}')">${t}</span>`).join('')}
+          ${(course.careerTags || []).map(t => `<span class="skill-badge" style="cursor:pointer" onclick="window.appNavigate('/career?select=${encodeURIComponent(careers.find(c=>c.label===t)?.id||'')}')">${t}</span>`).join('')}
         </div>
       </div>
     </div>
@@ -299,8 +299,8 @@ function renderCareerResults(careerId) {
       ${recommended.map((c, i) => `
         <div class="career-recommend-reason">
           💡 <strong>${c.title}</strong>をおすすめする理由：
-          ${c.careerTags.filter(t => t === career.label || career.skills.some(s => c.skills.includes(s))).length > 0
-            ? `「${career.label}」に必要な ${c.skills.filter(s => career.skills.includes(s)).join('・') || c.skills[0]} が身につく授業です`
+          ${(c.careerTags || []).filter(t => t === career.label || (career.skills || []).some(s => (c.skills || []).includes(s))).length > 0
+            ? `「${career.label}」に必要な ${(c.skills || []).filter(s => (career.skills || []).includes(s)).join('・') || (c.skills || [])[0] || 'スキル'} が身につく授業です`
             : `${career.label}に関連するスキルが習得できます`}
         </div>
         ${renderCourseCard(c, i)}
@@ -462,7 +462,7 @@ function applyFilters() {
   if (query) {
     filtered = filtered.filter(c =>
       c.title.toLowerCase().includes(query) ||
-      c.skills.some(s => s.toLowerCase().includes(query)) ||
+      (c.skills || []).some(s => s.toLowerCase().includes(query)) ||
       (c.university && c.university.toLowerCase().includes(query))
     );
   }
@@ -472,7 +472,7 @@ function applyFilters() {
   if (categories.length) filtered = filtered.filter(c => categories.includes(c.category));
   if (faculties.length) filtered = filtered.filter(c => faculties.includes(c.faculty));
   if (difficulties.length) filtered = filtered.filter(c => difficulties.includes(c.difficulty));
-  if (skills.length) filtered = filtered.filter(c => c.skills.some(s => skills.includes(s)));
+  if (skills.length) filtered = filtered.filter(c => (c.skills || []).some(s => skills.includes(s)));
 
   // Sort
   switch (sortBy) {
