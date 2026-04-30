@@ -79,8 +79,8 @@ export function renderCourseCard(course, animateIndex = 0) {
         <span>${course.credits}単位</span>
       </div>
       <div class="course-card-skills">
-        ${course.skills.slice(0, 3).map(s => `<span class="skill-badge">${s}</span>`).join('')}
-        ${course.skills.length > 3 ? `<span class="skill-badge">+${course.skills.length - 3}</span>` : ''}
+        ${(course.skills || []).slice(0, 3).map(s => `<span class="skill-badge">${s}</span>`).join('')}
+        ${(course.skills || []).length > 3 ? `<span class="skill-badge">+${(course.skills || []).length - 3}</span>` : ''}
       </div>
     </div>
   `;

@@ -1226,7 +1226,21 @@ function buildCatalogCourses() {
   return generated;
 }
 
-courses.push(...buildCatalogCourses());
+// 自動生成コースに不足フィールドを補完
+const generatedCourses = buildCatalogCourses().map(c => ({
+  skills: [],
+  format: "対面",
+  classMinutes: 90,
+  classroom: "教室未定",
+  textbook: { required: false, note: "資料配布" },
+  difficultyReason: { creditRate: 80, homeworkLoad: "普通", attendanceStrict: false, reason: "詳細はシラバス参照" },
+  yearNote: c.year ? c.year.join('・') + '年次対象' : '全学年',
+  semesterEnrollCount: c.enrollCount ?? 0,
+  careerTags: [],
+  reviews: [],
+  ...c  // 上書き（既存フィールドが優先される）
+}));
+courses.push(...generatedCourses);
 
 // ===== プロフィール管理 =====
 

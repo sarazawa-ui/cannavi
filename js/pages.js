@@ -92,7 +92,7 @@ export function renderCoursePage(params) {
             <div class="detail-stat-label">満足度</div>
           </div>
           <div class="detail-stat">
-            <div class="detail-stat-value">${course.semesterEnrollCount}</div>
+            <div class="detail-stat-value">${course.semesterEnrollCount ?? course.enrollCount ?? '--'}</div>
             <div class="detail-stat-label">今学期履修者数</div>
           </div>
           <div class="detail-stat">
