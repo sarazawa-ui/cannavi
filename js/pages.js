@@ -212,7 +212,7 @@ export function renderCoursePage(params) {
             <div class="basic-info-item"><dt>授業形式</dt><dd>${course.format || '--'}</dd></div>
             <div class="basic-info-item"><dt>授業時間</dt><dd>${course.classMinutes ? course.classMinutes + '分/コマ' : '--'}</dd></div>
             <div class="basic-info-item"><dt>教室</dt><dd>${course.classroom || '--'}</dd></div>
-            <div class="basic-info-item"><dt>対象学年</dt><dd>${course.yearNote || course.year.join('・') + '年'}</dd></div>
+            <div class="basic-info-item"><dt>対象学年</dt><dd>${course.yearNote || (course.year ? course.year.join('・') + '年' : '--')}</dd></div>
             <div class="basic-info-item"><dt>学部</dt><dd>${course.faculty}</dd></div>
             <div class="basic-info-item"><dt>単位数</dt><dd>${course.credits}単位</dd></div>
             <div class="basic-info-item"><dt>今学期履修者数</dt><dd>${course.semesterEnrollCount != null ? course.semesterEnrollCount + '名' : '--'}</dd></div>

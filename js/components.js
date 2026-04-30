@@ -148,11 +148,12 @@ export function renderReviewCard(review) {
 
 // ===== 評価方法バー =====
 export function renderEvalBars(evaluation) {
+  if (!evaluation) return '<p style="font-size:13px;color:var(--text-secondary)">評価方法はシラバスを参照してください</p>';
   const items = [
-    { label: 'テスト', value: evaluation.test },
-    { label: 'レポート', value: evaluation.report },
-    { label: '出席', value: evaluation.attendance },
-    { label: 'その他', value: evaluation.other },
+    { label: 'テスト', value: evaluation.test || 0 },
+    { label: 'レポート', value: evaluation.report || 0 },
+    { label: '出席', value: evaluation.attendance || 0 },
+    { label: 'その他', value: evaluation.other || 0 },
   ].filter(item => item.value > 0);
 
   return `
