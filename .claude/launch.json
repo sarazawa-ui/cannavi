@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "dev",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "3000", "-d", "C:/Users/saraz/Desktop/Claude/syllabus-app"],
+      "name": "syllabus",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/saraz/Desktop/Claude/syllabus-app/serve.js"],
       "port": 3000
     }
   ]

@@ -28,7 +28,7 @@ export const courses = [
       reason: "毎週プログラミング課題あり、演習中心で出席必須"
     },
     yearNote: "1・2年次対象",
-    videoUrl: "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "プログラミング未経験者向け。Pythonの基本文法から簡単なアプリケーション開発まで、段階的に学びます。",
     skills: ["Python", "論理的思考", "アルゴリズム", "問題解決"],
@@ -67,7 +67,7 @@ export const courses = [
       reason: "グループワークとプレゼン発表が多く、チームへの貢献度が評価される"
     },
     yearNote: "2・3年次対象",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "実際の企業事例を使って、マーケティング戦略の立案プロセスを実践的に学びます。グループワーク中心。",
     skills: ["マーケティング", "データ分析", "プレゼン", "チームワーク"],
@@ -106,7 +106,7 @@ export const courses = [
       reason: "制作課題中心で出席が評価に直結するが、楽しみながら取り組める"
     },
     yearNote: "1〜3年次対象（全学部）",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "Figmaを使ったプロトタイピングからユーザーテストまで、UXデザインの一連のプロセスを体験します。",
     skills: ["Figma", "UXリサーチ", "プロトタイピング", "デザイン思考"],
@@ -145,7 +145,7 @@ export const courses = [
       reason: "期末テストの配点が50%と高く、理論の暗記が必要"
     },
     yearNote: "2〜4年次対象",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "ノーベル経済学賞を受賞した行動経済学の理論を、身近な事例から学びます。意思決定のメカニズムを理解します。",
     skills: ["経済分析", "心理学", "意思決定理論", "批判的思考"],
@@ -184,7 +184,7 @@ export const courses = [
       reason: "最終プロジェクトのウエイトが大きく、Python・統計の事前知識が必要"
     },
     yearNote: "2・3年次対象（プログラミング基礎履修推奨）",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "実データを使った分析プロジェクトを通じて、データサイエンスの実践的なスキルを身につけます。",
     skills: ["Python", "統計学", "機械学習", "データ可視化"],
@@ -223,7 +223,7 @@ export const courses = [
       reason: "少人数制で出席が評価に大きく影響。制作課題は多いが自由度が高い"
     },
     yearNote: "1〜3年次対象（全学部）",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "企画・撮影・編集の一連のワークフローを少人数で実践。スマートフォンでの撮影テクニックも学びます。",
     skills: ["映像編集", "ストーリーテリング", "撮影技術", "Adobe Premiere"],
@@ -262,7 +262,7 @@ export const courses = [
       reason: "期末テスト50%・進度が速く、数学・統計の基礎がないと脱落しやすい"
     },
     yearNote: "2・3年次対象",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "心理学研究に必要な統計手法を基礎から応用まで学びます。SPSSを使った実践的な分析演習付き。",
     skills: ["統計分析", "SPSS", "研究デザイン", "論文読解"],
@@ -301,7 +301,7 @@ export const courses = [
       reason: "グループピッチ発表が評価の40%、起業家ゲストとの対話が多く準備が必要"
     },
     yearNote: "3・4年次対象（全学部）",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "起業のプロセスをリーンスタートアップの手法で実践。最終発表では投資家の前でピッチを行います。",
     skills: ["ビジネスモデル", "ピッチ", "リーンスタートアップ", "資金調達"],
@@ -340,7 +340,7 @@ export const courses = [
       reason: "レポート中心で取り組みやすく、単位取得率が高い入門科目"
     },
     yearNote: "1・2年次対象（全学部）",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "気候変動、生態系、エネルギー問題など、環境問題の基礎を幅広く学び、解決策を考えます。",
     skills: ["環境分析", "SDGs", "科学リテラシー", "プレゼン"],
@@ -379,7 +379,7 @@ export const courses = [
       reason: "レポート・ハンズオン課題が評価の半分。文系でも理解できる設計だが復習は必要"
     },
     yearNote: "2〜4年次対象（全学部）",
-    videoUrl: "",
+    videoUrl: "videos/intro.mp4",
     thumbnail: "",
     description: "ニューラルネットワーク、深層学習、生成AIなどの基礎理論を、デモとハンズオンで学びます。",
     skills: ["機械学習", "AI倫理", "Python", "ニューラルネットワーク"],
@@ -418,6 +418,7 @@ export const courses = [
       reason: "レポート課題が多いが実習との連動があり取り組みやすい。出席点が評価に影響"
     },
     yearNote: "1〜3年次対象",
+    videoUrl: "videos/intro.mp4",
     syllabusUrl: "https://www.mukogawa-u.ac.jp/~kyoumuka/syllabus/2025/syl_2025.htm",
     sourceNote: "武庫川女子大学 2025年度シラバス掲載の学部体系に準拠して反映",
     reviews: [
@@ -454,6 +455,7 @@ export const courses = [
       reason: "1年次必修に近い導入科目。出席管理が厳しく、複数教員によるオムニバス形式"
     },
     yearNote: "1年次のみ",
+    videoUrl: "videos/intro.mp4",
     syllabusUrl: "https://syllabus3.jm.kansai-u.ac.jp/syllabus/search/curri/2026/10/220/202610220010ZZZZ_.html?nendo=0;bu=0;gakubu=11;gakka=0;senko=0;couse=0;def_gakubu=",
     sourceNote: "関西大学 2026年度カリキュラム検索（社会安全学総論1・春学期 水3・2単位）を反映",
     reviews: [
@@ -490,6 +492,7 @@ export const courses = [
       reason: "文系・理系問わず受講可能な設計。政策提案演習など実践課題があり準備が必要"
     },
     yearNote: "全学年対象",
+    videoUrl: "videos/intro.mp4",
     syllabusUrl: "https://syllabus.kyoto-su.ac.jp/syllabus_search/search/search/",
     sourceNote: "京都産業大学 シラバス検索システム掲載の項目体系に準拠して反映",
     reviews: [
@@ -1118,7 +1121,7 @@ function buildCatalogCourses() {
       difficulty: 3,
       satisfaction: 4.3,
       enrollCount: 80 + i * 4,
-      videoUrl: "",
+      videoUrl: "videos/intro.mp4",
       thumbnail: "",
       description: `武庫川女子大学 建築学部 建築学科シラバス掲載科目。担当教員: ${course.teacher}`,
       instructorNames,
@@ -1160,7 +1163,7 @@ function buildCatalogCourses() {
       difficulty: 3,
       satisfaction: 4.2,
       enrollCount: 90 + i * 7,
-      videoUrl: "",
+      videoUrl: "videos/intro.mp4",
       thumbnail: "",
       description: `関西大学カリキュラム検索掲載科目。担当者: ${course.teacher} / 曜限: ${course.schedule}`,
       instructorNames,
@@ -1204,7 +1207,7 @@ function buildCatalogCourses() {
       difficulty: 2,
       satisfaction: 4.0,
       enrollCount: 70 + i * 5,
-      videoUrl: "",
+      videoUrl: "videos/intro.mp4",
       thumbnail: "",
       description: "京都産業大学シラバス検索で示される項目に沿って学修計画を立てるための検索用科目データです。",
       instructorNames,
